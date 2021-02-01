@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <input type="text" id="time">
+    <button>Udregn</button>
+
+
+    <script>
+        document.querySelector("button").addEventListener("click", klikketKnap);
+
+        function klikketKnap() {
+            let timer = document.querySelector("#time").value;
+            let co2UdledtIKgVedFlyrejse = timer * 109;
+            if (isNaN(co2UdledtIKgVedFlyrejse)) {
+                console.log("Dette er ikke et tal. Prøv igen");
+            } else {
+                console.log(`Ved ${timer} timers flyrejse har du udledt ${co2UdledtIKgVedFlyrejse} kg Co2`);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
