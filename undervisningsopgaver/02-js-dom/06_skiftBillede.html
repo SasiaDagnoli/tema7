@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        img {
+            width: 100%;
+        }
+
+        h1,
+        footer {
+            text-align: center;
+        }
+
+        article {
+            border: 1px solid black;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        @media (min-width: 1200px) {
+
+            section {
+                display: flex;
+                justify-content: center;
+                grid-gap: 30px;
+            }
+
+            h2 {
+                margin-left: 242px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Titel</h1>
+        <hr>
+    </header>
+    <main>
+        <h2>Undertitel</h2>
+        <section>
+            <article>
+                <img src="images/article1.jpg" alt="Billede af tag">
+                <h3>Article 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum nam, <br> laborum adipisci ipsa, est delectus praesentium. Excepturi soluta, eaque, <br> sapiente repellat consequatur officia. Sapiente officia temporibus inventore <br> ipsa, quod quos.</p>
+            </article>
+            <article>
+                <img src="images/article2.jpg" alt="Billede af gade">
+                <h3>Article 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem modi, animi <br> facere enim pariatur vero dolorem nostrum sunt veniam dignissimos labore <br> magni, nihil quam, repellat ut ab suscipit saepe dolore!</p>
+            </article>
+        </section>
+        <footer>
+            <hr>
+            <p>This is the footer</p>
+            <hr>
+        </footer>
+    </main>
+
+    <script>
+        const header = document.querySelector("header");
+        console.log(header);
+        const undertitel = document.querySelector("h2");
+        console.log(undertitel);
+        const pic1 = document.querySelector("article:first-child img");
+        console.log(pic1);
+        const under1 = document.querySelector("article:first-child h3");
+        console.log(under1);
+        const p1 = document.querySelector("article:first-child p");
+        console.log(p1);
+        const pic2 = document.querySelector("article:nth-child(2) img");
+        console.log(pic2);
+        const under2 = document.querySelector("article:nth-child(2) h3");
+        console.log(under2);
+        const p2 = document.querySelector("article:nth-child(2) p");
+        console.log(p2);
+        const footer = document.querySelector("footer");
+        console.log(footer);
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("Dom er loaded");
+            header.innerHTML = "<h1>Billeder</h1>";
+
+            under1.textContent = "Textcontent";
+            p1.textContent = "Noget helt ny tekst med textcontent og en masse Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem modi, animi.";
+
+            under2.innerHTML = "<h3>innerHTML</h3>";
+            p2.innerHTML = "<p> Noget helt ny tekst med textcontent og en masse Lorem ipsum dolor sit amet, consectetur <br> adipisicing elit.Autem modi, animi. </p>";
+
+            pic1.src = "https://placeimg.com/500/300/nature";
+            pic2.src = "https://placeimg.com/500/300/animals?t=1612267213577";
+
+            pic1.alt = "Nyt billede af natur";
+            pic2.alt = "Nyt billede af dyr";
+
+            let nyArticle = document.createElement("article");
+            let nyPic = document.createElement("img");
+            nyPic.src = "https://placeimg.com/500/300/tech";
+            nyArticle.appendChild(nyPic);
+            let h3 = document.createElement("h3");
+            let nyUnder = document.createTextNode("Ny article");
+            h3.appendChild(nyUnder);
+            nyArticle.appendChild(nyUnder);
+            let p = document.createElement("p");
+            let nyP = document.createTextNode("Her er en masse ny tekst");
+            p.appendChild(nyP);
+            nyArticle.appendChild(nyP);
+
+            document.querySelector("section").appendChild(nyArticle);
+
+            document.querySelector("article:first-child img").addEventListener("click", imgClicked);
+
+        }
+
+        function imgClicked() {
+            console.log("Der er klikket");
+            let ranNumber = Math.round(Math.random() * 10);
+            pic1.src = "https://placeimg.com/500/300/people" + ranNumber;
+            console.log(ranNumber);
+        }
+    </script>
+</body></html>
