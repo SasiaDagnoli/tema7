@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <h1>Tro på det...</h1>
+    <div>
+        <img id="image" />
+    </div>
+    <button>Videre</button>
+    <p>Billeder brugt med tilladelse af Rasmus Bregnhøi</p>
+    <script>
+        const slideshow = ["images/img1.png", "images/img2.png", "images/img3.png", "images/img4.png", "images/img5.png", "images/img6.png", "images/img7.png", "images/img8.png"];
+        const knap = document.querySelector("button");
+        let i = 0;
+        let billeder = document.getElementById("image");
+        billeder.src = slideshow[0];
+
+
+        knap.addEventListener("click", nextPic);
+
+        function nextPic() {
+            console.log("Klikket på videre");
+            i++;
+            billeder.src = slideshow[i];
+
+
+            if (i == slideshow.length - 1) {
+                knap.disabled = true;
+            }
+        }
+    </script>
+</body></html>
