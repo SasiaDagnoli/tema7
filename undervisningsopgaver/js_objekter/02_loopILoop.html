@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <section></section>
+    <template>
+        <article>
+            <h2 class="mærke"></h2>
+            <h3 class="model"></h3>
+            <p class="motor"></p>
+            <p class="km"></p>
+            <p>Udstyr</p>
+            <ul class="liste"></ul>
+        </article>
+    </template>
+
+
+    <script>
+        /*  const container = document.querySelector("section");
+        const template = document.querySelector("template");
+
+        async function hentData() {
+            const resultat = await fetch("loopILoop.json");
+            const json = await resultat.json;
+            vis(json);
+        }*/
+
+        let container = document.querySelector("section");
+        let temp = document.querySelector("template");
+
+        async function hentdata() {
+            const respons = await fetch("loopILoop.json");
+            const json = await respons.json();
+            vis(json);
+        }
+
+        function vis(data) {
+            data.forEach(bil => {
+                let klon = temp.cloneNode(true).content;
+                klon.querySelector("h2").textContent = bil.mærke;
+                klon.querySelector(".model").textContent = `Model: ${bil.model}`;
+                klon.querySelector(".motor").textContent = `Motor: ${bil.motor}`;
+                klon.querySelector(".km").textContent = `KM: ${bil.km}`;
+
+                bil.udstyr.forEach(emne => {
+                    klon.querySelector(".liste").innerHTML += "<li>" + emne + "<li>"
+                })
+
+                container.appendChild(klon);
+            })
+        }
+
+
+        hentdata();
+    </script>
+</body></html>

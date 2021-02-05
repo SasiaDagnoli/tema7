@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        article {
+            border: 2px solid pink;
+            border-radius: 25px;
+            padding: 5px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 25px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 50px;
+            padding: 50px;
+        }
+
+        h2,
+        p {
+            margin: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main></main>
+    <template>
+        <article>
+            <img src="" alt="" class="billeder">
+            <h2 class="navn"></h2>
+            <p class="hobby"></p>
+        </article>
+    </template>
+    <script>
+        const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+
+        const medieUrl = "https://persongalleri-5d3e.restdb.io/media/";
+
+        const options = {
+            headers: {
+                'x-apikey': "600fe9211346a1524ff12e31"
+            }
+        };
+
+        const main = document.querySelector("main");
+        const template = document.querySelector("template");
+
+        async function hentData() {
+            const resultat = await fetch(url, options);
+            const json = await resultat.json();
+            vis(json);
+        }
+
+        function vis(json) {
+            console.log(json);
+            console.log(template);
+            json.forEach(person => {
+                const klon = template.cloneNode(true).content;
+                klon.querySelector(".billeder").src = medieUrl + person.billede[0];
+                klon.querySelector(".navn").textContent = person.fornavn;
+                klon.querySelector(".hobby").textContent = person.hobby;
+                main.appendChild(klon);
+            })
+        }
+
+        hentData();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        h3 {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="liste"></section>
+    <template>
+        <h3></h3>
+        <img src="" alt="">
+        <p class="type"></p>
+        <p class="levested"></p>
+    </template>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+        const fil = "alleDyr.json";
+
+        async function hentData(fil) {
+            const resultat = await fetch(fil);
+            const json = await resultat.json();
+            start(json);
+        }
+
+        function start(dyr) {
+            console.log("DOM er loaded");
+            const listevisning = document.querySelector("#liste");
+            const dyrTemplate = document.querySelector("template");
+            dyr.forEach(etDyr => {
+                let klon = dyrTemplate.cloneNode(true).content;
+                klon.querySelector("h3").textContent = etDyr.navn;
+                klon.querySelector("img").src = etDyr.billede;
+                klon.querySelector(".type").textContent = `Type: ${etDyr.type}`;
+                klon.querySelector(".levested").textContent = `Levested: ${etDyr.levested}`;
+                listevisning.appendChild(klon);
+            })
+        }
+
+        hentData(fil);
+    </script>
+</body></html>
