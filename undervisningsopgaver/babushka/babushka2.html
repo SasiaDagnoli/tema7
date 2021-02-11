@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
     <style>
         .valgt {
             background-color: red;
@@ -18,10 +20,24 @@
             background-color: antiquewhite;
         }
 
+        p {
+            font-family: 'EB Garamond', serif;
+        }
+
+        footer p {
+            font-family: 'Lexend Mega', sans-serif;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 50px;
+            padding-bottom: 50px;
+        }
+
         article {
             border: 2px solid black;
             padding: 5px;
-            background-color: white;
         }
 
         img {
@@ -39,27 +55,18 @@
             text-align: center;
             padding-top: 30px;
             font-family: 'Lexend Mega', sans-serif;
-        }
-
-        header {
-            padding: 50px;
+            padding-bottom: 20px;
         }
 
         header h1 {
             color: red;
             background-color: #0039a6;
-            height: 80px;
             margin: -50px;
             font-family: 'Lexend Mega', sans-serif;
-            padding-left: 192px;
-            padding-top: 30px;
         }
 
-        section {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            grid-gap: 50px;
-            padding-bottom: 50px;
+        button {
+            background-color: white;
         }
 
         footer {
@@ -71,11 +78,38 @@
             font-family: 'Lexend Mega', sans-serif;
         }
 
+        @media (max-width: 900px) {
+            header h1 {
+                padding-left: 60px;
+                height: 80px;
+                padding-top: 90px;
+                font-size: 1.5rem;
+            }
+
+        }
+
         @media (min-width: 1200px) {
             section {
                 padding-left: 200px;
                 padding-right: 200px;
+                cursor: pointer;
             }
+
+            button {
+                cursor: pointer;
+            }
+
+            header {
+                padding: 50px;
+            }
+
+            header h1 {
+                padding-left: 192px;
+                height: 80px;
+                padding-top: 30px;
+            }
+
+
         }
     </style>
 </head>
@@ -94,7 +128,8 @@
 
     <section></section>
     <template>
-        <article><img src="" alt="" class="billeder">
+        <article class="retter">
+            <img src="" alt="" class="billeder">
             <h2 class="overskrift"></h2>
             <p class="navn"></p>
             <p class="pris"></p>
@@ -102,7 +137,7 @@
     </template>
 
     <footer>
-        Copyright 2021
+        <p>Copyright 2021</p>
     </footer>
 
     <script>
@@ -157,9 +192,15 @@
                     klon.querySelector(".billeder").src = medieUrl + ret.billede[0];
                     klon.querySelector(".navn").textContent = ret.navn;
                     klon.querySelector(".pris").textContent = `Pris: ${ret.pris} kr.`;
+                    klon.querySelector(".retter").addEventListener("click", () => visDetaljer(ret));
                     section.appendChild(klon);
                 }
             })
+        }
+
+        function visDetaljer(hvilken) {
+            console.log("ret");
+            location.href = `detalje.html?id=${hvilken._id}`;
         }
     </script>
 </body></html>
